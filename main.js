@@ -19,3 +19,7 @@ export function createApp() {
   }
 }
 // #endif
+
+// 引入uView主JS库
+import uView from '@/uni_modules/uview-ui'
+Vue.use(uView)
