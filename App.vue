@@ -1,7 +1,16 @@
 <script>
+	var {log} = console
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			if (!wx.cloud){
+				log('无法使用云能力')
+			}else{
+				wx.cloud.init({
+					env: 'medical-appointments-7b621f545c8',
+					traceUser: true
+				})
+			}
 		},
 		onShow: function() {
 			console.log('App Show')

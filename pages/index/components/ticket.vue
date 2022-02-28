@@ -2,10 +2,10 @@
 	<view>
 		<!-- ticket -->
 		<u-grid :border="false" col="5" @click="click">
-			<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
-				<u-icon :customStyle="{marginTop:20+'rpx'}" :name="baseListItem.src" :size="40" imgMode="widthFix">
+			<u-grid-item v-for="(item,index) in ticketList" :key="index">
+				<u-icon :customStyle="{marginTop:20+'rpx'}" :name="item.image" :size="40" imgMode="widthFix">
 				</u-icon>
-				<text class="grid-text">{{baseListItem.title}}</text>
+				<text class="grid-text">{{item.title}}</text>
 			</u-grid-item>
 		</u-grid>
 		<u-toast ref="uToast" />
@@ -15,29 +15,12 @@
 <script>
 	export default {
 		name: 'ticket',
+		props:{
+			ticketList: Array
+		},
 		data() {
 			return {
-				baseList: [{
-						src: 'cloud://medical-appointments-7b621f545c8.6d65-medical-appointments-7b621f545c8-1309166222/tickets/VIP.svg',
-						title: 'VIP'
-					},
-					{
-						src: 'cloud://medical-appointments-7b621f545c8.6d65-medical-appointments-7b621f545c8-1309166222/tickets/交友.svg',
-						title: '交友'
-					},
-					{
-						src: 'cloud://medical-appointments-7b621f545c8.6d65-medical-appointments-7b621f545c8-1309166222/tickets/火热.svg',
-						title: '火热'
-					},
-					{
-						src: 'cloud://medical-appointments-7b621f545c8.6d65-medical-appointments-7b621f545c8-1309166222/tickets/美颜.svg',
-						title: '美颜'
-					},
-					{
-						src: 'cloud://medical-appointments-7b621f545c8.6d65-medical-appointments-7b621f545c8-1309166222/tickets/音乐.svg',
-						title: '音乐'
-					},
-				]
+				
 			}
 		},
 		methods: {
