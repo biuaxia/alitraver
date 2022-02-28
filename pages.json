@@ -18,9 +18,9 @@
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "飞猪旅游",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"color":"#333333",
+		"selectedColor":"#F76E15",
+		"borderStyle":"black",
+		"backgroundColor":"#FFFFFF"
 	}
 }
