@@ -1,14 +1,15 @@
 const db = wx.cloud.database()
+const {log} = console
 
-var home = function(a) {
+var home = function(collectionName) {
 	return new Promise((resolve, reject) => {
-		const tabReq = db.collection('tabs')
-		tabReq.get()
+		const collectionReq = db.collection(collectionName)
+		collectionReq.get()
 			.then((res) => {
-				log(res)
+				resolve(res)
 			})
 			.catch((err) => {
-				log(err)
+				reject(err)
 			})
 	})
 }
