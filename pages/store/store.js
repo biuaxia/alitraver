@@ -7,6 +7,10 @@ const state = {
 	indexHomeArticleList: [],
 	// 首页横向 tab 切换时展示加载控件
 	indexHomeArticleLoadingState: false,
+	// 首页横向 tab 切换状态
+	indexHomeSwitchTabState: false,
+	// 首页文章总页数
+	indexHomeArticlePageNumTotal: 0,
 }
 
 var {
@@ -41,6 +45,13 @@ export default new Vuex.Store({
 					state.indexHomeArticleLoadingState = data
 				}, 1000)
 			}
+		},
+		indexHomeSwitchTabStateMutation(state, data) {
+			log(`Vuex中收到了变化: ${data}`)
+			state.indexHomeSwitchTabState = data
+		},
+		indexHomeArticlePageNumTotalMutation(state, data) {
+			state.indexHomeArticlePageNumTotal = data
 		}
 	}
 })

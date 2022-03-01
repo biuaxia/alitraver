@@ -19,6 +19,8 @@
 			</block>
 		</view>
 
+		<u-loadmore :status="pullDownStatus" />
+
 		<!-- <u-gap bgColor="#fff" height="1500px"></u-gap>
 		<u-divider text="已到底部"></u-divider> -->
 	</view>
@@ -29,13 +31,12 @@
 		name: 'article',
 		props: {
 			articleList: Array,
+			pullDownStatus: String,
 		},
 		data() {
-			return {
-			}
+			return {}
 		},
-		computed: {
-		},
+		computed: {},
 		methods: {}
 	};
 </script>

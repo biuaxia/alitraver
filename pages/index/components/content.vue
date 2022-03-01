@@ -15,7 +15,8 @@
 
 <script>
 	import {
-		homeList
+		homeList,
+		homeListCount
 	} from '../../../common/cloudfun.js'
 
 	var {
@@ -25,23 +26,32 @@
 	export default {
 		name: 'content',
 		props: {
-			tabList: Array
+			tabList: Array,
+			pullDownPageNum: Number,
+			pullDownPageSize: Number,
 		},
 		data() {
 			return {}
 		},
 		methods: {
 			click(item) {
-				log('item', item);
+				log('item', item)
+
+				// 重置横向 tab 切换状态
+				this.$store.commit('indexHomeSwitchTabStateMutation', true)
+				// 重置文章总页数
+				homeListCount(item.nav).then(res => {
+					this.$store.commit('indexHomeArticlePageNumTotalMutation', res.total)
+				})
 
 				// 点击切换展示加载控件
-				this.$store.commit('indexHomeListLoadingMutation', true);
+				this.$store.commit('indexHomeListLoadingMutation', true)
 
-				homeList(item.nav)
+				// 加载列表数据
+				homeList(item.nav, this.pullDownPageNum, this.pullDownPageSize)
 					.then(res => {
 						log(res)
-						let listData = res.data
-						this.$store.dispatch('indexHomeListAction', listData)
+						this.$store.dispatch('indexHomeListAction', res.data)
 
 						// 拿到数据隐藏加载控件
 						this.$store.commit('indexHomeListLoadingMutation', false);
