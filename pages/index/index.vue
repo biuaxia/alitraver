@@ -72,17 +72,19 @@
 				});
 		},
 		computed: {
-			// 取出 vuex 数据仓库的数据，Tips：list 表示 state 数据仓库中的数据名称
+			// 取出 vuex 数据仓库的数据，Tips：indexHome 表示 state 数据仓库中的数据名称
 			// ...mapState(['indexHome']),
+			...mapState(['indexHomeArticleList', 'indexHomeArticleLoadingState']),
 			// 处理首页 tab 切换时的数据
 			indexHomeListCompute() {
 				log('首页文章数据发生改变')
 				log('1. ', this.articleList)
-				log('2. ', this.$store.state.indexHomeArticleList)
-				this.articleList = this.$store.state.indexHomeArticleList
+				this.articleList = this.indexHomeArticleList
 			},
 			indexHomeListLoadingStateCompute() {
-				this.loadingState = this.$store.state.indexHomeArticleLoadingState
+				log('首页文章状态发生改变')
+				log('2. ', this.loadingState)
+				this.loadingState = this.indexHomeArticleLoadingState
 			}
 		},
 		methods: {}
@@ -91,6 +93,6 @@
 
 <style scoped>
 	.loading-container {
-		margin-bottom: 20upx;
+		margin: 20upx 0;
 	}
 </style>
