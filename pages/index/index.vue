@@ -18,6 +18,10 @@
 	import Article from './components/article';
 
 	import {
+		mapState
+	} from 'vuex'
+
+	import {
 		home,
 		homeList
 	} from '../../common/cloudfun.js';
@@ -57,6 +61,14 @@
 				.catch(err => {
 					log(err)
 				});
+		},
+		computed: {
+			// 取出 vuex 数据仓库的数据，Tips：list 表示 state 数据仓库中的数据名称
+			...mapState(['list']),
+			// 处理首页 tab 切换时的数据
+			indexHomeListCompute() {
+				this.articleList = this.list.listing
+			}
 		},
 		methods: {}
 	};
