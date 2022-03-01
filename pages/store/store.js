@@ -2,13 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-// 首页横向 tab 切换时传输的值
-const indexHome = {
-	articleList: []
-}
-
 const state = {
-	indexHome
+	// 首页横向 tab 切换时传输的值
+	indexHomeArticleList: [],
+	// 首页横向 tab 切换时展示加载控件
+	indexHomeArticleLoadingState: false,
 }
 
 var {
@@ -24,17 +22,25 @@ export default new Vuex.Store({
 			setTimeout(() => {
 				log('indexHomeListAction', data)
 			}, 1000)
-			
+
 			context.commit('indexHomeListMutation', data)
-		}
+		},
 	},
 	mutations: {
 		indexHomeListMutation(state, data) {
-			log('indexHomeListMutation', data)
-			state.indexHome = {
-				articleList: data
+			log('indexHomeListMutation', state, data)
+			state.indexHomeArticleList = data
+			log('indexHomeListMutation - saved', state, data)
+		},
+		indexHomeListLoadingMutation(state, data) {
+			log('indexHomeListLoadingMutation', data)
+			if (data) {
+				state.indexHomeArticleLoadingState = data
+			} else {
+				setTimeout(() => {
+					state.indexHomeArticleLoadingState = data
+				}, 1000)
 			}
-			log('indexHomeListMutation - saved', data)
 		}
 	}
 })

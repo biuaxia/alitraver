@@ -5,7 +5,14 @@
 		<Ticket :ticketList="ticketList"></Ticket>
 		<Classify :classifyList="classifyList"></Classify>
 		<Content :tabList="tabList"></Content>
-		<Article :articleList="articleList"></Article>
+
+		<view class="loading-container" v-if="loadingState">
+			<view class="u-page__loading-item">
+				<u-loading-icon mode="circle" color="#FFD300" size="36" inactive-color="#EEEEEE" :vertical="true"
+					:isDot="true" text="正在加载..."></u-loading-icon>
+			</view>
+		</view>
+		<Article :articleList="articleList" v-else></Article>
 	</view>
 </template>
 
@@ -45,7 +52,8 @@
 				ticketList: [],
 				classifyList: [],
 				tabList: [],
-				articleList: []
+				articleList: [],
+				loadingState: false
 			};
 		},
 		created() {
@@ -56,7 +64,8 @@
 					this.ticketList = res[1].data
 					this.classifyList = res[2].data
 					this.tabList = res[3].data
-					this.articleList = res[4].data
+					// this.articleList = res[4].data
+					this.$store.dispatch('indexHomeListAction', res[4].data)
 				})
 				.catch(err => {
 					log(err)
@@ -64,14 +73,24 @@
 		},
 		computed: {
 			// 取出 vuex 数据仓库的数据，Tips：list 表示 state 数据仓库中的数据名称
-			...mapState(['indexHome']),
+			// ...mapState(['indexHome']),
 			// 处理首页 tab 切换时的数据
 			indexHomeListCompute() {
-				this.articleList = this.indexHome.articleList
+				log('首页文章数据发生改变')
+				log('1. ', this.articleList)
+				log('2. ', this.$store.state.indexHomeArticleList)
+				this.articleList = this.$store.state.indexHomeArticleList
+			},
+			indexHomeListLoadingStateCompute() {
+				this.loadingState = this.$store.state.indexHomeArticleLoadingState
 			}
 		},
 		methods: {}
 	};
 </script>
 
-<style></style>
+<style scoped>
+	.loading-container {
+		margin-bottom: 20upx;
+	}
+</style>
