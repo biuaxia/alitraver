@@ -64,10 +64,10 @@
 		},
 		computed: {
 			// 取出 vuex 数据仓库的数据，Tips：list 表示 state 数据仓库中的数据名称
-			...mapState(['list']),
+			...mapState(['indexHome']),
 			// 处理首页 tab 切换时的数据
 			indexHomeListCompute() {
-				this.articleList = this.list.listing
+				this.articleList = this.indexHome.articleList
 			}
 		},
 		methods: {}

@@ -3,12 +3,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // 首页横向 tab 切换时传输的值
-const list = {
-	listing: []
+const indexHome = {
+	articleList: []
 }
 
 const state = {
-	list
+	indexHome
 }
 
 var {
@@ -17,19 +17,24 @@ var {
 
 export default new Vuex.Store({
 	state,
+	// 跳过异步操作，可以直接使用 `this.$store.commit('mutationsName', data)`
 	actions: {
-		indexHomeListAction(a, b) {
-			log('indexHomeListAction', a, b)
-			a.commit('indexHomeListMutation', b)
+		indexHomeListAction(context, data) {
+			// Actions 中可以执行异步操作，下面的日志会在 mutations 之后输出
+			setTimeout(() => {
+				log('indexHomeListAction', data)
+			}, 1000)
+			
+			context.commit('indexHomeListMutation', data)
 		}
 	},
 	mutations: {
-		indexHomeListMutation(a, b) {
-			log('indexHomeListMutation', a, b)
-			a.list = {
-				listing: b
+		indexHomeListMutation(state, data) {
+			log('indexHomeListMutation', data)
+			state.indexHome = {
+				articleList: data
 			}
-			log('indexHomeListMutation - saved', a, b)
+			log('indexHomeListMutation - saved', data)
 		}
 	}
 })

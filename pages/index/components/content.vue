@@ -37,7 +37,7 @@
 					.then(res => {
 						log(res)
 						let listData = res.data
-						this.$store.dispatch('indexHomeListAction',listData)
+						this.$store.dispatch('indexHomeListAction', listData)
 					})
 					.catch(err => {
 						log(err)
